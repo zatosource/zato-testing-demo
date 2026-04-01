@@ -1,0 +1,24 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "zato-testing-demo"
+version = "1.0.0"
+description = "Demo project showing how to test Zato services"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "zato-testing>=4.1,<4.2",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/demo"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
