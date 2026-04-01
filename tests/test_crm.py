@@ -10,17 +10,21 @@ class TestGetCustomer(ServiceTestCase):
 
     def test_returns_customer_details(self):
 
+        # Prepare test data ..
         name = 'Alice Johnson'
         email = 'alice@example.com'
         customer_id = 'CUST-001'
 
-        # Prepare test data ..
-        self.set_response('crm.api', {
+        # .. connection the service uses ..
+        conn_name = 'crm.api'
+
+        # .. tell the framework to make use of that data ..
+        self.set_response(conn_name, {
             'name': name,
             'email': email,
         })
 
-        # .. invoke our service ..
+        # .. invoke the service ..
         service = self.invoke(GetCustomer, {'customer_id': customer_id})
 
         # .. and run our assertions.

@@ -14,7 +14,8 @@ class GetCustomer(Service):
     def handle(self):
 
         # Get the CRM connection ..
-        conn = self.out.rest['crm.api'].conn
+        conn_name = 'crm.api'
+        conn = self.out.rest[conn_name].conn
 
         # .. the data to be sent ..
         params = {'id': self.request.input.customer_id}
