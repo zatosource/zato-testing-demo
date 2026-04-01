@@ -1,19 +1,28 @@
 # -*- coding: utf-8 -*-
 
+# zato-testing
 from zato_testing import ServiceTestCase
 
+# Our code
 from demo.services.crm import GetCustomer
 
 class TestGetCustomer(ServiceTestCase):
 
     def test_returns_customer_details(self):
 
+        name = 'Alice Johnson'
+        email = 'alice@example.com'
+        customer_id = 'CUST-001'
+
+        # Prepare test data ..
         self.set_response('crm.api', {
-            'name': 'Alice Johnson',
-            'email': 'alice@acme.com',
+            'name': name,
+            'email': email,
         })
 
-        service = self.invoke(GetCustomer, {'customer_id': 'CUST-001'})
+        # .. invoke our service ..
+        service = self.invoke(GetCustomer, {'customer_id': customer_id})
 
-        self.assertEqual(service.response.payload.name, 'Alice Johnson')
-        self.assertEqual(service.response.payload.email, 'alice@acme.com')
+        # .. and run our assertions.
+        self.assertEqual(service.response.payload.name, name)
+        self.assertEqual(service.response.payload.email, email)

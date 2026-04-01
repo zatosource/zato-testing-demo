@@ -12,7 +12,7 @@ install:
 	@echo ""
 
 test: install
-	@PYTHONPATH=$(CURDIR)/src $(PYTHON) -m pytest tests/ -v
+	@PYTHONPATH=$(CURDIR)/src $(PYTHON) -m pytest tests/ -p no:terminal
 
 clean:
 	@rm -rf $(VENV) build/ dist/ *.egg-info src/*.egg-info .pytest_cache/
